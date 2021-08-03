@@ -12,8 +12,9 @@ var gameState = "onSling";
 
 var bg = "sprites/back.png";
 var score = 0;
-var gameLevel=1;
+var gameLevel=4;
 var gameScore=0;
+var monster=[];
 
 function preload() {
     backgroundImg = loadImage(bg);
@@ -23,12 +24,19 @@ function setup(){
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
-    Monster1 = new Monster(350,10,50,50,1);
-    Monster2 = new Monster(500,30,50,50,2);
-    Monster3 = new Monster(650,50,50,50,1);
-    Monster4 = new Monster(800,5,50,50,2);
-    Monster5 = new Monster(850,0,50,50,1);
-    Monster6 = new Monster(1000,100,149,150,6);
+    
+    monster[0] = new Monster(300,10,50,50,1);
+    monster[1] = new Monster(500,10,50,50,1);
+    monster[2] = new Monster(600,30,50,50,2);
+    monster[3] = new Monster(550,10,50,50,1);
+    monster[4] = new Monster(500,30,50,50,2);
+    monster[5] = new Monster(850,0,50,50,1);
+    monster[6] = new Monster(300,10,50,50,1)
+    monster[7] = new Monster(500,30,50,50,2);
+    monster[8] = new Monster(700,0,50,50,1);
+    monster[9] = new Monster(850,0,50,50,2);
+    monster[10] = new Monster(1000,100,149,150,6);
+
     ground = new Ground(600,height,1200,20);
     platform = new Ground(600,height,1200,20);
 
@@ -37,9 +45,9 @@ function setup(){
 }
 
 function draw(){
+   
     if(backgroundImg)
         background(backgroundImg);
-    
         noStroke();
         textSize(25);
         fill("white");
@@ -48,65 +56,40 @@ function draw(){
     
     Engine.update(engine);
     //strokeWeight(4);
-   
+  
     ground.display();
     switch (gameLevel){
         case 1: 
-            Monster1.display();
-            Monster1.score();
+            monster[0].display();
+            monster[0].score();
         break;
         case 2: 
-            Monster1.display();
-            Monster2.display();
-            Monster1.score();
-            Monster2.score();
+        monster[1].display();
+        monster[1].score();
+        monster[2].display();
+        monster[2].score();
+           
         break;
         case 3: 
-            Monster1.display();
-            Monster2.display();
-            Monster3.display();
-            Monster1.score();
-            Monster2.score();
-            Monster3.score();
+        monster[4].display();
+        monster[4].score();
+        monster[5].display();
+        monster[5].score();
+        monster[6].display();
+        monster[6].score();
         break;
         case 4: 
-            Monster1.display();
-            Monster2.display();
-            Monster3.display();
-            Monster4.display();
-            Monster1.score();
-            Monster2.score();
-            Monster3.score();
-            Monster4.score();
+        monster[7].display();
+        monster[7].score();
+        monster[8].display();
+        monster[8].score();
+        monster[9].display();
+        monster[9].score();
+        monster[10].display();
+        monster[10].score();
             
         break;
-        case 5: 
-        
-            Monster1.display();
-            Monster2.display();
-            Monster3.display();
-            Monster4.display();
-            Monster5.display();
-            Monster1.score();
-            Monster2.score();
-            Monster3.score();
-            Monster4.score();
-            Monster5.score();
-        break;
-        case 6: 
-            Monster1.display();
-            Monster2.display();
-            Monster3.display();
-            Monster4.display();
-            Monster5.display();
-            Monster6.display();
-            Monster1.score();
-            Monster2.score();
-            Monster3.score();
-            Monster4.score();
-            Monster5.score();
-            Monster6.score();
-        break;
+       
         }
     
     arrow.display();

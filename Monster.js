@@ -1,9 +1,9 @@
 class Monster extends BaseClass {
   constructor(x, y,width,height,type){
     var options = {
-      friction:0.2,
-      density:0.03,
-      restitution: 1
+      friction:0.3,
+      density:0.3,
+      restitution: 0.8
   }
   
   super(x,y,width,height);
@@ -18,42 +18,29 @@ class Monster extends BaseClass {
   
     }
     this.Visiblity = 255;
-    this.body.velocity.x=0;
-    this.body.velocity.y=0;
-    this.body = Bodies.rectangle(x, y, width, height, options);
-    this.width = width;
-    this.height = height;
-    // this.image = loadImage("sprites/base.png");
-    World.add(world, this.body);
-   
   }
 
  display(){
-  super.display();
-  if(this.body.speed <10){
+  //  console.log(this.body.speed);
+    super.display();
+  //  if(this.body.speed < 10){
     
-    this.Visibility = 255;
-   }
-   else{
-     //World.remove(world, this.body);
-     push();
-     this.Visiblity = this.Visiblity -1;
-    tint(255,this.Visiblity);
-     image(this.image, this.body.position.x, this.body.position.y, 50, 50);
-     pop();
-   }
+  //  }
+  //  else{
+  //    World.remove(world, this.body);
+  //    push();
+  //    this.Visiblity = this.Visiblity - 5;
+  //    tint(255,this.Visiblity);
+  //    image(this.image, this.body.position.x, this.body.position.y, 50, 50);
+  //    pop();
+  //  }
   }
 
   score(){
-    if (this.Visiblity < 0 && this.Visiblity > -1){
-      score = score+1;
+    if (this.Visiblity < 0 && this.Visiblity > -1005){
+      score++;
     }
   }
-
-  
-  
-
-
 
 
 
