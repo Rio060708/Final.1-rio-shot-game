@@ -12,7 +12,7 @@ var gameState = "onSling";
 
 var bg = "sprites/back.png";
 var score = 0;
-var gameLevel=4;
+var gameLevel=1;
 var gameScore=0;
 var monster=[];
 
