@@ -1,3 +1,2 @@
-Rio's Shot Game
-Levels - 4
-Shoot arrow, hit monsters to score
+# AngryBirdsStage3
+Stage 3 Angry Birds: Introducing Constraint

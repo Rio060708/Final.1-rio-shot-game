@@ -15,6 +15,7 @@ var score = 0;
 var gameLevel=1;
 var gameScore=0;
 var monster=[];
+var collisionpair=[];
 
 function preload() {
     backgroundImg = loadImage(bg);
@@ -29,9 +30,9 @@ function setup(){
     monster[1] = new Monster(500,10,50,50,1);
     monster[2] = new Monster(600,30,50,50,2);
     monster[3] = new Monster(550,10,50,50,1);
-    monster[4] = new Monster(500,30,50,50,2);
-    monster[5] = new Monster(850,0,50,50,1);
-    monster[6] = new Monster(300,10,50,50,1)
+    monster[4] = new Monster(350,30,50,50,2);
+    monster[5] = new Monster(500,0,50,50,1);
+    monster[6] = new Monster(800,10,50,50,1)
     monster[7] = new Monster(500,30,50,50,2);
     monster[8] = new Monster(700,0,50,50,1);
     monster[9] = new Monster(850,0,50,50,2);
@@ -52,22 +53,31 @@ function draw(){
         textSize(25);
         fill("white");
         text("Score  " + score, width-300, 50);
-        text("Level  " + gameLevel, width-300, 100);
+        text("Level  " + gameLevel,100, 50);
     
     Engine.update(engine);
-    //strokeWeight(4);
-  
+
     ground.display();
     switch (gameLevel){
         case 1: 
             monster[0].display();
             monster[0].score();
+            textSize(25);
+            fill("red");
+            text("Hit the monster . Space to reload. ",300, 100);
+            if ( monster[0].collisioncheck(arrow) )
+            {nextLevel();}
         break;
         case 2: 
         monster[1].display();
         monster[1].score();
         monster[2].display();
         monster[2].score();
+        textSize(25);
+        fill("red");
+        text("Hit the monsters. Space to reload. ",300, 100);
+        if ( monster[1].collisioncheck(arrow) && monster[2].collisioncheck(arrow))
+        {nextLevel();}
            
         break;
         case 3: 
@@ -77,6 +87,11 @@ function draw(){
         monster[5].score();
         monster[6].display();
         monster[6].score();
+        textSize(25);
+        fill("red");
+        text("Hit all monsters to move ahead. Space to reload. ",300, 100);
+        if ( monster[4].collisioncheck(arrow) && monster[5].collisioncheck(arrow) && monster[6].collisioncheck(arrow))
+        {nextLevel();}
         break;
         case 4: 
         monster[7].display();
@@ -87,48 +102,30 @@ function draw(){
         monster[9].score();
         monster[10].display();
         monster[10].score();
-            
+        textSize(25);
+        fill("red");
+        text("Hit all monsters to move ahead. Space to reload. ",300, 100);
+        if ( monster[7].collisioncheck(arrow) && monster[8].collisioncheck(arrow) && monster[9].collisioncheck(arrow) &&  monster[10].collisioncheck(arrow))
+        {nextLevel();}
         break;
+
+        case 5:
+        textSize(25);
+        fill("red");
+        text("Awesome all levels cleared. ",300, 100);
        
         }
     
     arrow.display();
     platform.display();
-    slingshot.display();
-
-    if(gameLevel===1 && score===1){
-    
-        nextLevel();
-        
-    }
-       
-  else if(gameLevel===2 && score === 2){
-        nextLevel();
-        
-    }
-
-    else if(gameLevel===3 && score === 3){
-        nextLevel();
-        
-    }
-    else if(gameLevel===4 && score === 4){
-        nextLevel();
-        
-    }
-    else if(gameLevel===5 && score === 5){
-        nextLevel();
-        
-    }
-    else if(gameLevel===6 && score === 6){
-        nextLevel();
-        
-    }
+    slingshot.display(); 
+   
 }
 
 function mouseDragged(){
-    //if (gameState!=="launched"){
+   
         Matter.Body.setPosition(arrow.body, {x: mouseX , y: mouseY});
-    //}
+  
 }
 
 
@@ -142,7 +139,7 @@ function keyPressed(){
        arrow.trajectory = [];
        Matter.Body.setPosition(arrow.body,{x:200, y:50});
        slingshot.attach(arrow.body);
-       Monster6.display();
+      
     }
 }
 
@@ -151,5 +148,6 @@ function nextLevel(){
     arrow.trajectory = [];
         Matter.Body.setPosition(arrow.body,{x:200, y:50});
         slingshot.attach(arrow.body);
-        gameScore += gameLevel*10;
-}
+        score += gameLevel*10;
+  }
+
